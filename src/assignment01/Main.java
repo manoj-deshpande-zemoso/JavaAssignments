@@ -6,13 +6,21 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class Main {
+import assignments.common.CommonFunctions;
+
+public class Main implements CommonFunctions{
 
 	public static void main(String[] args) {
 		
+		System.out.println("We're gonna test if we can filter files in the home directory using regex");
+		Main main = new Main();
+		main.filterFileNames();
+		
+	}
+	
+	public void filterFileNames() {
 		File homeDirectory = new File(System.getenv("HOME"));
 		List<String> fileNames = Arrays.asList(homeDirectory.list());
-		final String applicationStop = "I'm done";
 		Scanner sc = new Scanner(System.in);
 		while(true) {
 			System.out.println("Please input a regex:");
@@ -29,9 +37,9 @@ public class Main {
 			fileNames.stream()
 			.filter(Pattern.compile(regex).asPredicate())
 			.forEach(System.out::println);
-			System.out.println("\n*******************\n"); // breaker
+			
+			breaker();
 		}
-		
 	}
 
 }
