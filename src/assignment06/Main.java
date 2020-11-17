@@ -24,12 +24,12 @@ public class Main implements CommonFunctions{
 		
 		// It will not print because we did not call the constructor
 		System.out.println("Checking if constructor initialization prints");
-		SomeClass[] arr = new SomeClass[2];
+		ConstructorPrintTestClass[] arr = new ConstructorPrintTestClass[2];
 		
 		breaker();
 		// On creation of objects by invoking constructor, the params will be printed
-		arr[0] = new SomeClass("John");
-		arr[1] = new SomeClass("Cena");
+		arr[0] = new ConstructorPrintTestClass("John");
+		arr[1] = new ConstructorPrintTestClass("Cena");
 		// Now we can see John Cena
 		
 	}

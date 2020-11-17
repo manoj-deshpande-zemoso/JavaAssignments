@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -14,12 +15,18 @@ public class Main {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		System.out.println("We are going to ping www.google.com website 10 times and find the median ping");
 		Main main = new Main();
-		main.findMedianPing();
+
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Please enter the host you want to ping: ");
+		String host = sc.nextLine();
+		System.out.print("Enter the number of pings: ");
+		int numOfPings = sc.nextInt();
+		main.findMedianPing(host, numOfPings);
 	}
 	
-	public void findMedianPing() throws IOException, InterruptedException {
+	public void findMedianPing(String host, int numOfPings) throws IOException, InterruptedException {
 		// Create and start the ping process
-		ProcessBuilder pb = new ProcessBuilder("ping", "www.google.com");
+		ProcessBuilder pb = new ProcessBuilder("ping", host);
 		Process process = pb.start();
 		
 		// Reading Process input stream
@@ -31,7 +38,7 @@ public class Main {
 			System.out.println(s);
 			counter++;
 			// Ending process if pinged 10 times
-			if(counter>10) {
+			if(counter>numOfPings) {
 				process.destroy();
 				break;
 			}
@@ -44,7 +51,11 @@ public class Main {
 				.collect(Collectors.toList());
 		// Sorting list to find median
 		list.sort(Float::compare);
-		System.out.println("Median ping is : " + ((list.get(4) + list.get(5))/2));
+		int size = list.size();
+		float medianPing = list.get(size/2);
+		if(size%2==0)
+			medianPing = (list.get(size/2) + list.get((size/2)-1))/2;
+		System.out.println("Median ping is : " + medianPing);
 	}
 
 }

@@ -17,6 +17,8 @@ public class Main implements CommonFunctions{
 		System.out.println("We're gonna test if the entered text contains all alphabets(case insensitive)");
 		
 		Main main = new Main();
+		// O(n) time complexity
+		// O(n) space complexity
 		main.containsAllAlphabets();
 		
 		System.out.println("Stopping application....Stopped");

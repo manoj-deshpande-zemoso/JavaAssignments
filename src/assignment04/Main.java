@@ -24,13 +24,13 @@ public class Main {
 			String[] dates = sc.nextLine().split(" ");
 			Date registeredDate = sdf.parse(dates[0]);
 			Date currentDate = sdf.parse(dates[1]);
-			main.validateKYC(registeredDate, currentDate);
+			System.out.println(main.validateKYC(registeredDate, currentDate));
 		}
 		sc.close();
 
 	}
 
-	private void validateKYC(Date registeredDate, Date currentDate) {
+	protected String validateKYC(Date registeredDate, Date currentDate) {
 
 		Calendar registeredCal = Calendar.getInstance();
 		registeredCal.setTime(registeredDate);
@@ -39,26 +39,24 @@ public class Main {
 		currentCal.setTime(currentDate);
 		
 		if(registeredCal.compareTo(currentCal)>=0) {
-			System.out.println("No range");
-			return;
+			return "No range";
 		}
 		
 		registeredCal.set(FIELD_YEAR, currentCal.get(FIELD_YEAR));
 		if(registeredCal.compareTo(currentCal)>=0) {
 			registeredCal.add(FIELD_DAY_OF_MONTH, -30);
 			if(registeredCal.compareTo(currentCal)>0) {
-				System.out.println("No range");
-				return;
+				return "No range";
 			}
-			System.out.println(sdf.format(registeredCal.getTime()) + " " + sdf.format(currentCal.getTime()));
-			return;
+			return sdf.format(registeredCal.getTime()) + " " + sdf.format(currentCal.getTime());
 		}
 		registeredCal.add(FIELD_DAY_OF_MONTH, 30);
 		if(registeredCal.compareTo(currentCal)<0) currentCal.setTime(registeredCal.getTime());
 		registeredCal.add(FIELD_DAY_OF_MONTH, -60);
 		
-		System.out.println(sdf.format(registeredCal.getTime()) + " " + sdf.format(currentCal.getTime()));
-		
+		return sdf.format(registeredCal.getTime()) + " " + sdf.format(currentCal.getTime());
 	}
+
+
 
 }

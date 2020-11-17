@@ -1,6 +1,6 @@
 package assignment05.data;
 
-public class ClassA {
+public class LocalVsInstanceVariablesClass {
 	int a;
 	char c;
 	

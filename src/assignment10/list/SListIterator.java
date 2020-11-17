@@ -13,7 +13,6 @@ public class SListIterator<T> {
 	
 	public void add(T value) {
 		if(head == null) {
-			System.out.println("Head is null so I am adding head");
 			head = new Node<T>(value);
 			
 		} else {
@@ -53,6 +52,7 @@ public class SListIterator<T> {
 	
 	protected String traverse() {
 		StringBuffer sb = new StringBuffer();
+		if(head == null) return "";
 		if(head != null) sb.append(head.getValue());
 		Node<T> node = head.getNextNode();
 		while(node != null) {

@@ -19,7 +19,7 @@ public class SList<T> {
 	}
 	
 	public String toString() {
-		String returnString = sListIterator == null ? "" : sListIterator.traverse();
+		String returnString = sListIterator.traverse();
 		return returnString;
 	}
 }
